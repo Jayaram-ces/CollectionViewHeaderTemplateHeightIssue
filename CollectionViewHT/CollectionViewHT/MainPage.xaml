@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModels="clr-namespace:CollectionViewHT"
+             x:Class="CollectionViewHT.MainPage">
+
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="CollectionViewHeaderTemplate">
+                <StackLayout BackgroundColor="Green" IsVisible="{Binding IsHeaderVisible}" HeightRequest="{Binding HeaderHeight}">
+                    <Label Text="{Binding HeaderText}" TextColor="Wheat" FontSize="18" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="CollectionViewBodyTemplate" >
+                <StackLayout BackgroundColor="Yellow" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Label Text="{Binding Name}" TextColor="Black" FontSize="18"/>
+                </StackLayout>
+            </DataTemplate>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <CollectionView  Grid.Row="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                       HeaderTemplate="{StaticResource CollectionViewHeaderTemplate}"
+                        ItemTemplate="{StaticResource CollectionViewBodyTemplate}" 
+                       Header="{Binding .}"
+                        ItemsSource="{Binding CustomerList}"   BackgroundColor="PaleVioletRed">
+
+        </CollectionView>
+        <Button Grid.Row="1" Text="Show/Hide Header" HeightRequest="50" Command="{Binding ShowHideHeaderCommand}"/>
+    </Grid>
+
+</ContentPage>
